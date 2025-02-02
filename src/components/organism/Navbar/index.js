@@ -1,13 +1,16 @@
-import Link from "next/link";
+import Link from 'next/link';
+import { useSelector } from 'react-redux';
 
 export default function Navbar() {
+  const user = useSelector((state) => state.auth.user) || 'Guest';
+
   return (
     <nav className="bg-blue-600 text-white w-full font-serif font-bold flex justify-center">
-      <div className="h-24 flex justify-between items-center w-[1440px]">
-        <div className="p-5 w-32">
-          <Link href={"/"}>
+      <div className="sm:h-24 h-16 flex justify-between items-center lg:w-[1440px] w-full">
+        <div className="sm:p-5 p-4 sm:w-48">
+          <Link href={'/'}>
             <svg
-              className="w-16"
+              className="sm:w-16 w-10"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 -960 960 960"
               fill="#fff"
@@ -19,8 +22,8 @@ export default function Navbar() {
         <div className="p-5 sm:block hidden">
           <span className="text-lg">Country App</span>
         </div>
-        <div className="p-5 w-32 flex gap-2">
-          <span>Guest</span>
+        <div className="sm:p-5 p-4 sm:w-48 flex gap-2">
+          <span className='text-nowrap'>{user}</span>
           <svg
             className=""
             xmlns="http://www.w3.org/2000/svg"
@@ -35,4 +38,4 @@ export default function Navbar() {
       </div>
     </nav>
   );
-};
+}

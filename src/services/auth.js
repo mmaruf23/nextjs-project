@@ -1,9 +1,12 @@
 import axios from 'axios';
-const api = process.env.NEXT_PUBLIC_API_USER;
+const regiterapi = process.env.NEXT_PUBLIC_API_REGISTER;
+const api = process.env.NEXT_PUBLIC_API_LOGIN;
 
 const register = async (payload) => {
   try {
-    const response = await axios.post(`${api}/register`, payload);
+    const response = await axios.post(`${regiterapi}/register`, payload);
+    console.log(response);
+    
     return response;
   } catch (error) {
     // console.log('axios register err : ', error);
@@ -12,7 +15,7 @@ const register = async (payload) => {
 };
 const login = async (payload) => {
   try {
-    const response = await axios.post(`${api}/login`, payload);
+    const response = await axios.post(`${api}/auth/login`, payload);
     return response;
   } catch (error) {
     // console.log('axios register err : ', error);
@@ -20,4 +23,14 @@ const login = async (payload) => {
   }
 };
 
-export { register, login };
+const getUsername = async (id) => {
+  try {
+    const response = await axios.get(`${api}/users/${id}`)
+    return response;
+  } catch (error) {
+    return error.response;
+  }
+}
+
+
+export { register, login, getUsername };
