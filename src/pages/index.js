@@ -1,15 +1,11 @@
-import CountryPage from "@/components/organism/CountryPage";
-import CountryForm from "@/components/organism/Forms/CountryForm";
-import Layout from "@/components/templates/Layout";
-import { getAseanCountries } from "@/services/getCountries";
+import CountryPage from '@/components/organism/CountryPage';
+import CountryForm from '@/components/organism/Forms/CountryForm';
+import Layout from '@/components/templates/Layout';
+import { useSelector } from 'react-redux';
 
-export default function Home({aseanCountries}) {
-  return (
-    <Layout>
-      <CountryPage />
-      {/* <CountryForm aseanCountries={aseanCountries} /> */}
-    </Layout>
-  );
+export default function Home({ aseanCountries }) {
+  const userCountry = useSelector((state) => state.country.userCountry);
+  return <Layout>{userCountry ? <CountryPage /> : <CountryForm />}</Layout>;
 }
 
 // export async function getServerSideProps() {
@@ -24,5 +20,5 @@ export default function Home({aseanCountries}) {
 //     };
 //   } catch (error) {
 //     console.log("getData err", error)
-//   }  
+//   }
 // }

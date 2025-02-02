@@ -1,17 +1,46 @@
 import Button from '@/components/atoms/Button';
 import Option from '@/components/atoms/OptionCountries';
+import { setCountries, setUserCountry } from '@/redux/countrySlice';
+import { getAllCountries } from '@/services/getCountries';
 import Link from 'next/link';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-export default function CountryForm({ aseanCountries }) {
+export default function CountryForm() {
+  const dispatch = useDispatch();
   const countryRef = useRef();
-  function handleClick() {
-    console.log(countryRef.current);
-    alert(countryRef.current.value);
-  }
-  aseanCountries.map((country) => {
-    console.log(country.name.common);
+  const countries = useSelector((state) => state.country.countries); // ini adalah state yang menampung data countries dari api
+  const aseanCountries = countries.filter((country) => {
+    // ini filter data hanya negara asean untuk user guest
+    return country.subregion === 'South-Eastern Asia';
   });
+
+  // -- Mengambil data negara dari API
+  useEffect(() => {
+    async function fetchCountries() {
+      try {
+        const response = await getAllCountries();
+        dispatch(setCountries(response));
+      } catch (error) {
+        console.log('err fetchCountries :', error);
+      }
+    }
+
+    fetchCountries();
+  }, [dispatch]);
+
+  useEffect(() => {
+    const userCountry = localStorage.getItem('userCountry') ?? '';
+    dispatch(setUserCountry(userCountry));
+  }, [dispatch]);
+
+  function handleClick() {
+    // alert(countryRef.current.value);
+    console.log(countryRef.current.value, "akan didispatch dan disimpan ke localStorage");
+    dispatch(setUserCountry(countryRef.current.value));
+    localStorage.setItem('userCountry', countryRef.current.value);
+    console.log(countryRef.current.value, "selesai didispatch dan disimpan ke localStorage");
+  }
 
   return (
     <div className="mt-44 flex flex-col gap-7">
@@ -32,7 +61,7 @@ export default function CountryForm({ aseanCountries }) {
           ))}
         </select>
 
-        <Button onClick={handleClick}>This is my country!</Button>
+        <Button onClick={handleClick} typeButton="button">This is my country!</Button>
       </div>
       <p className="text-center">
         Please{' '}
