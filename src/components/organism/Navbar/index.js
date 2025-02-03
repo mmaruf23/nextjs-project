@@ -1,17 +1,20 @@
 import { setUser } from '@/redux/authSlice';
 import { setUserCountry } from '@/redux/countrySlice';
+import Calipitalize from '@/utils/Calipitalize';
 import Link from 'next/link';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 export default function Navbar() {
-  const user = useSelector((state) => state.auth.user) || 'Guest';
+  const user = useSelector((state) => state.auth.user) || 'guest';
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
 
   function handleLogout() {
     dispatch(setUser(''));
     localStorage.removeItem('token');
+    dispatch(setUserCountry(''));
+    localStorage.removeItem('userCountry');
     console.log('berhasil logout');
   }
 
@@ -43,7 +46,7 @@ export default function Navbar() {
         <div onClick={() => setIsOpen(!isOpen)} className=''>
           <div className="relative inline-block text-left">
             <div className="sm:p-5 p-4 sm:w-48 flex gap-2">
-              <span className="text-nowrap">{user}</span>
+              <span className="text-nowrap">{Calipitalize(user)}</span>
               <svg
                 className=""
                 xmlns="http://www.w3.org/2000/svg"

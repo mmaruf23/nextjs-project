@@ -2,14 +2,15 @@ import Button from '@/components/atoms/Button';
 import Option from '@/components/atoms/OptionCountries';
 import useCountries from '@/hooks/useCountries';
 import useLogin from '@/hooks/useLogin';
-import { setCountries, setUserCountry } from '@/redux/countrySlice';
-import { getAllCountries } from '@/services/getCountries';
+import { setUserCountry } from '@/redux/countrySlice';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useEffect, useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 export default function CountryForm() {
   const user = useLogin();
+  const router = useRouter();
 
   const dispatch = useDispatch();
   const countryRef = useRef();
@@ -33,6 +34,11 @@ export default function CountryForm() {
       countryRef.current.value,
       'selesai didispatch dan disimpan ke localStorage'
     );
+  }
+
+  function handleAlien(){
+    alert('Please enjoy Earth!, Mr. Alien')
+    router.push('/countries')
   }
 
   return (
@@ -71,7 +77,7 @@ export default function CountryForm() {
       )}
       <div className="flex justify-center text-red-500">
         <button
-          onClick={() => alert('Aku alien')}
+          onClick={handleAlien}
           className="rounded-xl border border-red-500 p-3 hover:bg-red-400 hover:text-white font-semibold"
         >
           <span>I live on Mars, sir!</span>

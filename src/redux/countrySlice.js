@@ -8,8 +8,6 @@ const countrySlice = createSlice({
   },
   reducers: {
     setCountries: (state, action) => {
-      console.log("counties");
-      
       state.countries = action.payload;
     },
     setUserCountry: (state, action) => {

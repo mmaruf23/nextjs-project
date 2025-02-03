@@ -1,9 +1,7 @@
-import SeachIcons from '@/components/atoms/Icons/SearchIcon';
 import Card from '@/components/molecules/CountryCard';
 import Layout from '@/components/templates/Layout';
 import useCountries from '@/hooks/useCountries';
-import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useCallback, useEffect, useState } from 'react';
 
 export default function Countries() {
   const countries = useCountries();
@@ -15,18 +13,17 @@ export default function Countries() {
     }
   }, [countries]);
 
-  function handleChange(e) {
-    const text = e.target.value;
-    if (text.length >= 1) {
+  
 
-      const filtered = countries.filter((item) =>
-        item.name.common.toLowerCase().includes(text.toLowerCase())
-      );
+  const handleChange = useCallback((e) => {
+    const text = e.target.value;
+    if (text.length >= 1){
+      const filtered = countries.filter(item => item.name.common.toLowerCase().includes(text.toLowerCase()))
       setSearch(filtered)
     } else {
-      setSearch(countries);
+      setSearch(countries)
     }
-  }
+  }, [countries])
 
   return (
     <Layout>
