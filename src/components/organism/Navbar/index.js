@@ -62,7 +62,7 @@ export default function Navbar() {
 
               <div className="absolute w-52 bg-blue-500 border rounded-md shadow-lg">
                 <ul className="py-1">
-                  {user == "Guest" ? (
+                  {user == "guest" ? (
                     <>
                       <li className="px-4 py-2 hover:bg-blue-800 cursor-pointer"><Link href={'/login'}>Login</Link></li>
                       <li className="px-4 py-2 hover:bg-blue-800 cursor-pointer"><Link href={'/register'}>Sign Up</Link></li>

@@ -1,18 +1,24 @@
 import Card from '@/components/molecules/CountryCard';
 import Layout from '@/components/templates/Layout';
 import useCountries from '@/hooks/useCountries';
+import useLogin from '@/hooks/useLogin';
 import { getAllCountries } from '@/services/getCountries';
 import { useCallback, useEffect, useState } from 'react';
 
 export default function Countries({ countries }) {
   // const countries = useCountries();
+  const user = useLogin()
 
   const [search, setSearch] = useState([]);
   useEffect(() => {
-    if (countries?.length) {
-      setSearch(countries);
+    if (countries.length) {
+      if (user){
+        setSearch(countries);
+      } else {
+        setSearch(countries.filter((country) => country.subregion === 'South-Eastern Asia'));
+      }
     }
-  }, [countries]);
+  }, [countries, user]);
 
   const handleChange = useCallback(
     (e) => {
