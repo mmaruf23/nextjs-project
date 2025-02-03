@@ -1,13 +1,15 @@
 import Button from '@/components/atoms/Button';
 import CountryDetail from '@/components/molecules/CountryDetail';
 import CountryFlag from '@/components/molecules/CountryFlag';
+import useCountries from '@/hooks/useCountries';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useSelector } from 'react-redux';
 
 export default function CountryPage() {
   const userCountry = useSelector((state) => state.country.userCountry);
-  const countries = useSelector((state) => state.country.countries);
+  // const countries = useSelector((state) => state.country.countries);
+  const countries = useCountries();
   const detailUserCountry = countries.find(
     (country) => country.cca3 === userCountry
   );

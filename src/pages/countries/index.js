@@ -16,7 +16,6 @@ export default function Countries() {
   }, [countries]);
 
   function handleChange(e) {
-    // setSearch(e.target.value);
     const text = e.target.value;
     if (text.length >= 1) {
 
@@ -40,10 +39,10 @@ export default function Countries() {
             placeholder="Seach Countries"
           />
         </div>
-        <div className="lg:mt-10 mt-5 w-full p-5">
+        <div className="lg:mt-10 mt-5 p-5">
           <div className="flex gap-5 flex-wrap justify-center">
             {search?.map((country) => (
-              <Card key={country.name.common} name={country.name} />
+              <Card key={country.name.common} name={country.name} cca3={country.cca3}/>
             ))}
           </div>
         </div>
