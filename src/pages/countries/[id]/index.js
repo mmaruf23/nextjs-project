@@ -8,6 +8,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 export default function CountryById() {
+  const [disabledButton, setDisabledButton] = useState(false);
   const router = useRouter();
   const countries = useCountries();
   const [id, setId] = useState('');
@@ -23,6 +24,10 @@ export default function CountryById() {
       setId(router.query.id.toUpperCase());
     }
   }, [router.query.id]);
+
+  function handleClick() {
+    setDisabledButton(true);
+  }
 
   return (
     <Layout>
@@ -47,9 +52,9 @@ export default function CountryById() {
               </>
             )}
           </div>
-          <div className="flex justify-center mt-10">
+          <div className="flex justify-center my-10">
             <Link href={'/countries'}>
-              <Button>Check Other Countries</Button>
+              <Button onClick={handleClick} isDisabled={disabledButton}>Check Other Countries</Button>
             </Link>
           </div>
         </div>

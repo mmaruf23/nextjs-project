@@ -1,10 +1,10 @@
 import CountryPage from '@/components/organism/CountryPage';
 import CountryForm from '@/components/organism/Forms/CountryForm';
 import Layout from '@/components/templates/Layout';
-import { setUser } from '@/redux/authSlice';
-import { getUsername } from '@/services/auth';
-import { jwtDecode } from 'jwt-decode';
-import { useEffect } from 'react';
+// import { setUser } from '@/redux/authSlice';
+// import { getUsername } from '@/services/auth';
+// import { jwtDecode } from 'jwt-decode';
+// import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 export default function Home() {

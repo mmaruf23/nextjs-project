@@ -9,7 +9,7 @@ export default function Card({name, cca3}) {
         <div className="">
           <p>{name.common}</p>
           <p className="text-gray-500 text-sm">
-            {Object.values(name.nativeName)[0]?.common}
+            {Object.values(name.nativeName ?? [])[0]?.common}
           </p>
         </div>
         <Link href={`/countries/${cca3}`}>

@@ -31,14 +31,13 @@ export default function LoginForm() {
     // -- Jika sudah login akan dialihkan ke Home
     if (isLogin) {
       alert('Already logged in!');
-      router.back();
+      router.push('/');
     }
   }, [isLogin, router]);
 
   async function handleSubmit(event) {
     event.preventDefault();
     setDisabledButton(true);
-    console.log("button disable");
     
     const payload = {
       username: event.target.username.value,
