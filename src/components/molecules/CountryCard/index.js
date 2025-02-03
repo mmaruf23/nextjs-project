@@ -9,7 +9,7 @@ export default function Card({name, cca3}) {
         <div className="">
           <p>{name.common}</p>
           <p className="text-gray-500 text-sm">
-            {Object.values(name.nativeName?? [])[0]?.common}
+            {Object.values(name.nativeName)[0]?.common}
           </p>
         </div>
         <Link href={`/countries/${cca3}`}>
@@ -20,11 +20,7 @@ export default function Card({name, cca3}) {
         </div>
         </Link>
       </div>
-      {/* <div className=" w-full flex-1 flex flex-col">
-        <div className="w-full flex-1 max-h-14 border-b">
 
-        </div>
-      </div> */}
     </div>
   );
 }
